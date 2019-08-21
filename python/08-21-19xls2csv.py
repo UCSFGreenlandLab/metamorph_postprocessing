@@ -14,14 +14,14 @@ for xls_file in glob.glob(os.path.join(os.getcwd(),"*.xls*")):
     data_xls.columns = new_header
     csv_file = os.path.splitext(xls_file)[0] + ".csv"
     data_xls.to_csv(csv_file, encoding='utf-8', index=False)
-    print "Generating CSV # ", x, xls_file
+    print("Generating CSV # ", x, xls_file)
     x = x + 1
 
 subprocess.call('mkdir CSV', shell=True)
 subprocess.call("find . -name '*.csv' -exec mv {} CSV \;", shell=True)
 
-print ""
-print ""
-print "DONE..."
-print "Please run process.py manually, as detailed in your protocol."
-print "Please let me know of any errors you encounter and I will attempt to resolve them ASAP."
+print("")
+print("")
+print("DONE...")
+print("Please run process.py manually, as detailed in your protocol.")
+print("Please let me know of any errors you encounter and I will attempt to resolve them ASAP.")

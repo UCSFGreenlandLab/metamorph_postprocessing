@@ -40,10 +40,10 @@ def constructSimple(sets, content):
         new_set_content[3][FLUR_COLS_START_IDX:] = [s.telo_fluor, s.telo_nucl_div, s.telo_area_div]
 
         ## is this what I want?
-        print s.telo_area_div
+        print(s.telo_area_div)
 	
         # csv write what we care about into another file
-        ##print s.telo_fluor, s.telo_nucl_div, s.telo_area_div
+        ##print(s.telo_fluor, s.telo_nucl_div, s.telo_area_div)
 	
         output += new_set_content[:]
 
@@ -53,12 +53,12 @@ def constructSimple(sets, content):
 
 
 def readContent(file_name):
-    print "Reading contents of file: " + file_name
+    print("Reading contents of file: " + file_name)
     with open(file_name, "rU") as f:
         reader = csv.reader(f)
         raw_content = [line for line in reader]
         if len(raw_content[0]) > 6:
-            print "Warning: Found more than 6 columns in the input file. Only the first 6 columns will be used as input"
+            print("Warning: Found more than 6 columns in the input file. Only the first 6 columns will be used as input")
         return [line[:6] for line in raw_content]
 
 
@@ -72,20 +72,20 @@ def isPath(l):
 	return len(l[1]) != 0 and isEmptyLine(l[2:])
 
 def getSets(content):
-    print "Reading data sets..."
+    print("Reading data sets...")
     set_start_indices = [i for i, line in enumerate(content) if isHeader(line)]
     set_names = [content[start_idx][0] for start_idx in set_start_indices]
     paths = [content[start_idx][2] for start_idx in set_start_indices]
-    print "Found sets: " + ", ".join(set_names)
-    ##print set_names
-    ##print paths
+    print("Found sets: " + ", ".join(set_names))
+    ##(set_names)
+    ##print(paths)
 
     set_end_indices = []
     for i, start_idx in enumerate(set_start_indices):
         end_idx = len(content)-1 if i == len(set_start_indices) - 1 else (set_start_indices[i+1] - 2)
         while (end_idx != len(content) and isEmptyLine(content[end_idx])):
             end_idx -= 1
-        print "Set " + str(set_names[i]) + " spans non-empty lines " + str(start_idx) + " to " + str(end_idx)
+        print("Set " + str(set_names[i]) + " spans non-empty lines " + str(start_idx) + " to " + str(end_idx))
         set_end_indices.append(end_idx)
 
     return set_names,paths,[Set(set_names[i], set_start_indices[i], set_end_indices[i], content) for i in range(len(set_start_indices))]
@@ -194,8 +194,8 @@ def constructOutput(sets, content):
     return whatIwant, output
 
 def writeOutput(file_name, content):
-    print "Finished!"
-    print "Writing output to file: " + file_name
+    print("Finished!")
+    print("Writing output to file: " + file_name)
     with open(file_name, 'w') as f:
         writer = csv.writer(f, delimiter=",")
         writer.writerows(content)
@@ -209,7 +209,7 @@ def main(options, args):
         file_names = [args[0]]
 
     out_dir = dir_name + "_out"
-    print "Emptying directory (including contents): " + out_dir
+    print("Emptying directory (including contents): " + out_dir)
     if os.path.exists(out_dir):
         shutil.rmtree(out_dir, ignore_errors=True)
     os.mkdir(out_dir)
@@ -217,11 +217,11 @@ def main(options, args):
 
     for file_name in file_names:
         assert file_name.endswith(".csv"), "File name must end with .csv"
-        print "#"*100
+        print("#"*100)
         content = readContent(dir_name + "/" + file_name)
-        print "#"*100
+        print("#"*100)
         set_names, paths, sets = getSets(content)
-        print "#"*100
+        print("#"*100)
         
         for s in sets:
             s.calcTeloData()

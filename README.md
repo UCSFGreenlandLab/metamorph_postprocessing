@@ -30,7 +30,7 @@ The easiest implementation of this software is to use the /master directory itse
 
 - xls2csv.py can crash out due to UTF encoding issues. Only caused by corrupted .xls files in testing... a quarantine system for these problematic files should be implemented
 
-#### CHANGELOG:
+### CHANGELOG:
 
 ##### 08-21-19:
 - Update Python scripts from 2.x to 3.x

@@ -6,6 +6,8 @@ This software can batch-convert Metamorph .xls files and run the included Metamo
 
 Python scripts in workflow have been translated from Python 2.x to Python 3.x. Hooray.
 
+A free replacement to MetaMorph is being dev'd [here](https://github.com/TheRealSFBae/telo-FISH_image_analysis). It's a ways off from being used with this pipeline, but the ultimate goal here is to reconsile these two repos into one end-to-end telo-FISH analysis tool.
+
 ### USAGE:
 
 The easiest implementation of this software is to use the /master directory itself as a tool!
